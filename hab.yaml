@@ -8,6 +8,7 @@ spec:
   service:
     name: consul
     topology: leader
+    group: test-one
 ---
 apiVersion: v1
 kind: Service
