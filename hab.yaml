@@ -1,0 +1,28 @@
+apiVersion: habitat.sh/v1beta1
+kind: Habitat
+metadata:
+  name: consul-latest
+spec:
+  image: defilan/consul:latest
+  count: 10
+  service:
+    name: consul
+    topology: leader
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: consul-front
+spec:
+  selector:
+    habitat-name: consul-latest
+  type: NodePort
+  ports:
+  - name: web
+    targetPort: 8500
+    port: 8500
+    protocol: TCP
+  - name: hab
+    targetPort: 9631
+    port: 9631
+    protocol: TCP
